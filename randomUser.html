@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Random User</title>
+  </head>
+  <body>
+    <div id="div">
+      <ul id="ul">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <script>
+      const ul = document.getElementById("ul");
+      const li1 = ul.children[0];
+      const li2 = ul.children[1];
+      const li3 = ul.children[2];
+      const li4 = ul.children[3];
+      const li5 = ul.children[4];
+      const li6 = ul.children[5];
+      let userInfo;
+      function getUserInfo() {
+        fetch("https://randomuser.me/api")
+          .then((r) => r.json())
+          .then((data) => {
+            userInfo = data;
+
+            li1.textContent = `Имя: ${userInfo.results[0].name["first"]}`;
+            li2.textContent = `Фамилия: ${userInfo.results[0].name["last"]}`;
+            li3.textContent = `Возраст: ${userInfo.results[0].dob.age}`;
+            li4.textContent = `Эл. почта: ${userInfo.results[0].email}`;
+            li5.textContent = `Телефон: ${userInfo.results[0].phone}`;
+            li6.textContent = `Проживание: ${userInfo.results[0].location["country"]}, ${userInfo.results[0].location["city"]}`;
+          });
+      }
+      getUserInfo();
+    </script>
+  </body>
+</html>

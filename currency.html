@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency Binance</title>
+  </head>
+  <body>
+    <div id="div">
+      <table>
+        <thead>
+          TEXT
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button id="btn">Кнопка</button>
+    <script>
+      const tbody = document.querySelector("tbody");
+      const tr0 = tbody.children[0];
+      td0 = tr0.children[0];
+      td1 = tr0.children[1];
+      td2 = tr0.children[2];
+      td3 = tr0.children[3];
+
+      const tr1 = tbody.children[1];
+      td01 = tr1.children[0];
+      td11 = tr1.children[1];
+      td22 = tr1.children[2];
+      td33 = tr1.children[3];
+
+      let cur;
+      function getCur() {
+        fetch("https://api2.binance.com/api/v3/ticker/24hr")
+          .then((r) => r.json())
+          .then((data) => {
+            cur = data;
+          });
+      }
+      const btn = document.getElementById("btn");
+      btn.addEventListener("click", () => {
+        getCur();
+        td0.textContent = `Валюта: ${cur[0].symbol}`;
+        td1.textContent = `priceChange: ${cur[0].priceChange}`;
+        td2.textContent = `priceChangePercent: ${cur[0].priceChangePercent}`;
+        td3.textContent = `weightedAvgPrice: ${cur[0].weightedAvgPrice}`;
+
+        td01.textContent = `Валюта: ${cur[1].symbol}`;
+        td11.textContent = `priceChange: ${cur[1].priceChange}`;
+        td22.textContent = `priceChangePercent: ${cur[1].priceChangePercent}`;
+        td33.textContent = `weightedAvgPrice: ${cur[1].weightedAvgPrice}`;
+      });
+    </script>
+  </body>
+</html>

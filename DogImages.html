@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dog Images</title>
+  </head>
+  <body>
+    <script>
+      const btn = document.createElement("button");
+      document.body.append(btn);
+      btn.textContent = "Сменить картинку";
+      const div = document.createElement("div");
+      document.body.append(div);
+
+      const img = document.createElement("img");
+      div.append(img);
+
+      let image;
+      function chImg() {
+        fetch("https://dog.ceo/api/breeds/image/random")
+          .then((response) => response.json())
+          .then((data) => {
+            image = data;
+          });
+        img.src = image.message;
+      }
+      btn.addEventListener("click", chImg);
+    </script>
+  </body>
+</html>
